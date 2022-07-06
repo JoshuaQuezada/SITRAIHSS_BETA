@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SITRAIHSSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbUser">
+          <Key>
+            <PropertyRef Name="Usu_Id" />
+          </Key>
+          <Property Name="Usu_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usu_UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Usu_Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Usu_Status" Type="bit" Nullable="false" />
+          <Property Name="Usu_UserCreate" Type="nvarchar" MaxLength="50" />
+          <Property Name="Usu_DateCreate" Type="datetime" />
+          <Property Name="Usu_UserModifies" Type="nvarchar" MaxLength="50" />
+          <Property Name="Usu_DateModifies" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="SITRAIHSSModelStoreContainer">
+          <EntitySet Name="tbUser" EntityType="Self.tbUser" Schema="MANT" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SITRAIHSSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbUser">
+          <Key>
+            <PropertyRef Name="Usu_Id" />
+          </Key>
+          <Property Name="Usu_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usu_UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Usu_Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Usu_Status" Type="Boolean" Nullable="false" />
+          <Property Name="Usu_UserCreate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Usu_DateCreate" Type="DateTime" Precision="3" />
+          <Property Name="Usu_UserModifies" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Usu_DateModifies" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="SITRAIHSSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbUser" EntityType="Self.tbUser" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SITRAIHSSModelStoreContainer" CdmEntityContainer="SITRAIHSSEntities">
+          <EntitySetMapping Name="tbUser">
+            <EntityTypeMapping TypeName="SITRAIHSSModel.tbUser">
+              <MappingFragment StoreEntitySet="tbUser">
+                <ScalarProperty Name="Usu_Id" ColumnName="Usu_Id" />
+                <ScalarProperty Name="Usu_UserName" ColumnName="Usu_UserName" />
+                <ScalarProperty Name="Usu_Password" ColumnName="Usu_Password" />
+                <ScalarProperty Name="Usu_Status" ColumnName="Usu_Status" />
+                <ScalarProperty Name="Usu_UserCreate" ColumnName="Usu_UserCreate" />
+                <ScalarProperty Name="Usu_DateCreate" ColumnName="Usu_DateCreate" />
+                <ScalarProperty Name="Usu_UserModifies" ColumnName="Usu_UserModifies" />
+                <ScalarProperty Name="Usu_DateModifies" ColumnName="Usu_DateModifies" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
