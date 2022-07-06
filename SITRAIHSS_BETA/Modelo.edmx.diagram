@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="eb4127e589b641c480d83d13e631dc87" Name="Diagram1">
         <EntityTypeShape EntityType="SITRAIHSSModel.tbUser" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SITRAIHSSModel.VW_LISTUSER" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

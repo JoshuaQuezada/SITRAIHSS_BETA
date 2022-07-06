@@ -15,11 +15,13 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         <label>Nombre De Usuario</label>
-                                        <input class="form-control" runat="server" id="txtNombreUsuario" type="text" autocomplete="off" placeholder="joshua.quezada"/>
+                                        <input class="form-control" runat="server" id="txtNombreUsuario" type="text" placeholder="joshua.quezada"/>
+                                        <a id="ErrorNombreUsuario" runat="server" visible="false">El Campo Esta Vacio</a>
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <label>Contraseña</label>
-                                        <input class="form-control" runat="server" id="txtContraseña" type="password" autocomplete="off"/>
+                                        <input class="form-control" runat="server" id="txtContraseña" type="text" />
+                                        <a id="ErrorContraseña" runat="server" visible="false">El Campo Esta Vacio</a>
                                     </div>
                                     <div class="form-group">
                                         <asp:Button text="Guardar" runat="server" CssClass="btn btn-info" id="btnGuardar" onclick="btnGuardar_Click"/>

@@ -60,6 +60,7 @@ namespace SITRAIHSS_BETA
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
+            Session["Codigo_usuario"] = null;
             Response.Redirect("UsuarioAdmin.aspx");
         }
     }

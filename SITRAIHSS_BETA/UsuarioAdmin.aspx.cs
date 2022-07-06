@@ -40,12 +40,69 @@ namespace SITRAIHSS_BETA
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                Cls_Usuarios Usuario = new Cls_Usuarios();
+                string sNombre = txtNombreUsuario.Value;
+                string sContraseña = txtContraseña.Value;
+                if (sNombre == "")
+                {
+                    ErrorNombreUsuario.Visible = true;
+                    ErrorContraseña.Visible = false;
+                }
+                else if (sContraseña == "")
+                {
+                    ErrorContraseña.Visible = true;
+                    ErrorNombreUsuario.Visible = false;
+                }
+                else if (sContraseña == "" && sNombre == "")
+                {
+                    ErrorNombreUsuario.Visible = true;
+                    ErrorContraseña.Visible = true;
+                }
+                else
+                {
+                    
+                }
+            }
+            catch (Exception Ex)
+            {
+                string msj = Ex.Message;
+            }
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                Cls_Usuarios Usuario = new Cls_Usuarios();
+                string sNombre = txtNombreUsuario.Value;
+                string sContraseña = txtContraseña.Value;
+                if (sNombre == "")
+                {
+                    ErrorNombreUsuario.Visible = true;
+                    ErrorContraseña.Visible = false;
+                }
+                else if (sContraseña == "")
+                {
+                    ErrorNombreUsuario.Visible = false;
+                    ErrorContraseña.Visible = true;
+                }
+                else if (sNombre == "" && sContraseña == "")
+                {
+                    ErrorNombreUsuario.Visible = true;
+                    ErrorContraseña.Visible = true;
+                }
+                else
+                {
+                    Usuario.InsertarNuevoRegistro(sNombre, sContraseña);
+                    Response.Redirect("UsuarioIndex.aspx");
+                }
+            }
+            catch (Exception ex)
+            {
+                string msj = ex.Message;
+            }
         }
     }
 }

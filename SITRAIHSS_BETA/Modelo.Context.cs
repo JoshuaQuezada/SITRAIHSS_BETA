@@ -12,6 +12,8 @@ namespace SITRAIHSS_BETA
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class SITRAIHSSEntities : DbContext
     {
@@ -26,5 +28,56 @@ namespace SITRAIHSS_BETA
         }
     
         public virtual DbSet<tbUser> tbUser { get; set; }
+        public virtual DbSet<VW_LISTUSER> VW_LISTUSER { get; set; }
+    
+        public virtual ObjectResult<INSERT_MANT_tbUser_Result> INSERT_MANT_tbUser(string usernName, string password, Nullable<bool> status, string userCreate, Nullable<System.DateTime> dateCreate)
+        {
+            var usernNameParameter = usernName != null ?
+                new ObjectParameter("UsernName", usernName) :
+                new ObjectParameter("UsernName", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(bool));
+    
+            var userCreateParameter = userCreate != null ?
+                new ObjectParameter("UserCreate", userCreate) :
+                new ObjectParameter("UserCreate", typeof(string));
+    
+            var dateCreateParameter = dateCreate.HasValue ?
+                new ObjectParameter("DateCreate", dateCreate) :
+                new ObjectParameter("DateCreate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<INSERT_MANT_tbUser_Result>("INSERT_MANT_tbUser", usernNameParameter, passwordParameter, statusParameter, userCreateParameter, dateCreateParameter);
+        }
+    
+        public virtual ObjectResult<string> PA_EDIT_USER(Nullable<int> id_Usuario, string usuerName, string password, string usuarioModifica, Nullable<System.DateTime> fechaModifica)
+        {
+            var id_UsuarioParameter = id_Usuario.HasValue ?
+                new ObjectParameter("Id_Usuario", id_Usuario) :
+                new ObjectParameter("Id_Usuario", typeof(int));
+    
+            var usuerNameParameter = usuerName != null ?
+                new ObjectParameter("UsuerName", usuerName) :
+                new ObjectParameter("UsuerName", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var usuarioModificaParameter = usuarioModifica != null ?
+                new ObjectParameter("UsuarioModifica", usuarioModifica) :
+                new ObjectParameter("UsuarioModifica", typeof(string));
+    
+            var fechaModificaParameter = fechaModifica.HasValue ?
+                new ObjectParameter("FechaModifica", fechaModifica) :
+                new ObjectParameter("FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("PA_EDIT_USER", id_UsuarioParameter, usuerNameParameter, passwordParameter, usuarioModificaParameter, fechaModificaParameter);
+        }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SITRAIHSSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SITRAIHSSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbUser">
           <Key>
             <PropertyRef Name="Usu_Id" />
@@ -18,11 +18,40 @@
           <Property Name="Usu_UserModifies" Type="nvarchar" MaxLength="50" />
           <Property Name="Usu_DateModifies" Type="datetime" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SITRAIHSS.MANT.VW_LISTUSER' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VW_LISTUSER">
+          <Key>
+            <PropertyRef Name="Id_User" />
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Id_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Function Name="INSERT_MANT_tbUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MANT">
+          <Parameter Name="UsernName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
+          <Parameter Name="UserCreate" Type="nvarchar" Mode="In" />
+          <Parameter Name="DateCreate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="PA_EDIT_USER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MANT">
+          <Parameter Name="Id_Usuario" Type="int" Mode="In" />
+          <Parameter Name="UsuerName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UsuarioModifica" Type="nvarchar" Mode="In" />
+          <Parameter Name="FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <EntityContainer Name="SITRAIHSSModelStoreContainer">
           <EntitySet Name="tbUser" EntityType="Self.tbUser" Schema="MANT" store:Type="Tables" />
+          <EntitySet Name="VW_LISTUSER" EntityType="Self.VW_LISTUSER" store:Type="Views" store:Schema="MANT">
+            <DefiningQuery>SELECT 
+    [VW_LISTUSER].[Id_User] AS [Id_User], 
+    [VW_LISTUSER].[Username] AS [Username]
+    FROM [MANT].[VW_LISTUSER] AS [VW_LISTUSER]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SITRAIHSSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -41,7 +70,33 @@
         </EntityType>
         <EntityContainer Name="SITRAIHSSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbUser" EntityType="Self.tbUser" />
+          <FunctionImport Name="INSERT_MANT_tbUser" ReturnType="Collection(SITRAIHSSModel.INSERT_MANT_tbUser_Result)">
+            <Parameter Name="UsernName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+            <Parameter Name="UserCreate" Mode="In" Type="String" />
+            <Parameter Name="DateCreate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="VW_LISTUSER" EntityType="SITRAIHSSModel.VW_LISTUSER" />
+          <FunctionImport Name="PA_EDIT_USER" ReturnType="Collection(String)">
+            <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
+            <Parameter Name="UsuerName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="UsuarioModifica" Mode="In" Type="String" />
+            <Parameter Name="FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
+        <EntityType Name="VW_LISTUSER">
+          <Key>
+            <PropertyRef Name="Id_User" />
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Id_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="INSERT_MANT_tbUser_Result">
+          <Property Type="String" Name="Column1" Nullable="false" MaxLength="1" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -62,6 +117,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="INSERT_MANT_tbUser" FunctionName="SITRAIHSSModel.Store.INSERT_MANT_tbUser" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SITRAIHSSModel.INSERT_MANT_tbUser_Result">
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="VW_LISTUSER">
+            <EntityTypeMapping TypeName="SITRAIHSSModel.VW_LISTUSER">
+              <MappingFragment StoreEntitySet="VW_LISTUSER">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="PA_EDIT_USER" FunctionName="SITRAIHSSModel.Store.PA_EDIT_USER" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

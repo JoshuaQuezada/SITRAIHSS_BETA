@@ -24,13 +24,31 @@ namespace SITRAIHSS_BETA
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtNombreUsuario;
 
         /// <summary>
+        /// Control ErrorNombreUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor ErrorNombreUsuario;
+
+        /// <summary>
         /// Control txtContraseña.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputPassword txtContraseña;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtContraseña;
+
+        /// <summary>
+        /// Control ErrorContraseña.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor ErrorContraseña;
 
         /// <summary>
         /// Control btnGuardar.

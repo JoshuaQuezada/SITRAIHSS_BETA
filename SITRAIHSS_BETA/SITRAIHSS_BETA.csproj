@@ -2038,6 +2038,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\Cls_Connection.cs" />
+    <Compile Include="Class\Cls_Usuarios.cs" />
     <Compile Include="Class\Cls_Utilitarios.cs" />
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -2045,6 +2046,9 @@
     </Compile>
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="INSERT_MANT_tbUser_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -2091,6 +2095,9 @@
     </Compile>
     <Compile Include="UsuarioIndex.aspx.designer.cs">
       <DependentUpon>UsuarioIndex.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VW_LISTUSER.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
